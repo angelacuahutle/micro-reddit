@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root "authors#index"
 
   resources :authors do
-    resources :posts
+    resources :posts do
+      resources :comments
+    end
   end
 end
