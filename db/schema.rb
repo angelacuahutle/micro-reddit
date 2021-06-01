@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_28_160854) do
+ActiveRecord::Schema.define(version: 2021_05_31_195344) do
 
   create_table "authors", force: :cascade do |t|
     t.string "username"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2021_05_28_160854) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_authors_on_email", unique: true
     t.index ["username"], name: "index_authors_on_username", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "author_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_comments_on_author_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -32,5 +42,7 @@ ActiveRecord::Schema.define(version: 2021_05_28_160854) do
     t.index ["title"], name: "index_posts_on_title", unique: true
   end
 
+  add_foreign_key "comments", "authors"
+  add_foreign_key "comments", "posts"
   add_foreign_key "posts", "authors"
 end
