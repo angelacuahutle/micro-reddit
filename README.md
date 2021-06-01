@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# A Very Simple Weblog
+# A Very Simple Weblog (Micro-Reddit)
 
 > This is our first app using Rails and it consists of a very simple Weblog according to [these tutorial instructions](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby-on-rails/lessons/building-with-active-record-ruby-on-rails).
 
@@ -13,10 +13,6 @@ This project was built in order to learn about active records, models, and assoc
 - Ruby 3.0.0
 - Rails 6.1.3.2 (Ruby Gem)
 - Sqlite 1.4.2 (Ruby Gem)
-
-## Live Demo
-
-No Live Demo has been provided for this Project. The deployment should be performed locally.
 
 ## Getting Started
 
@@ -37,13 +33,46 @@ For this project, the following environment should be previously installed on yo
 - Next, run `cd micro-reddit` to go into the project root directory
 - Run `bundle install` to install all Ruby Gems this project requires
 
-
 ### Install
 
 - Run `rails db:migrate` to migrate the databases needed to run this project
-- Run `rails server`to run the server in the browser
-- IN your browser you should go to http://127.0.0.1:3000/ 
+- Run `rails console` to perform your own tests with your newly created database and their validations, as well! You'll be able to **C**reate, **R**ead, **U**pdate and **D**estroy any records from your tables: authors, posts, and comments. Here you have a simple summary with the most relevant features of each Table and their associations:
 
+  #### Authors
+
+      - username:string [unique, 4-12 chars, present]
+      - email:string [unique, present]
+      - password:string [6-16 chars, present]
+      - id:integer
+      - created_at:datetime
+      - updated_at:datetime
+
+      - *has_many posts*
+      - *has_many comments*
+
+  #### Posts
+
+      - title:string [unique, present]
+      - body:text [present]
+      - author_id:integer [present]
+      - id:integer
+      - created_at:datetime
+      - updated_at:datetime
+
+      - *belongs_to author*
+      - *has_many comments*
+
+  #### Comments
+
+      - body:text [present]
+      - author_id:integer [present]
+      - post_id:integer [present]
+      - id:integer
+      - created_at:datetime
+      - updated_at:datetime
+
+      - *belongs_to author*
+      - *belongs_to post*
 
 ## Authors
 
